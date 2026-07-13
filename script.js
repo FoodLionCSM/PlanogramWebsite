@@ -16,19 +16,54 @@ function goToStore() {
   window.location.href = `store.html?store=${storeNumber}`;
 }
 
+function loadImageWithFallback(element, fileName) {
+  const candidates = [
+    `./Images/${fileName}`,
+    `./images/${fileName}`,
+    `Images/${fileName}`,
+    `images/${fileName}`,
+    `./${fileName}`,
+    `${fileName}`
+  ];
+
+  let currentIndex = 0;
+
+  const tryNext = () => {
+    if (currentIndex >= candidates.length) {
+      return;
+    }
+
+    element.onerror = () => {
+      currentIndex += 1;
+      if (currentIndex < candidates.length) {
+        element.src = candidates[currentIndex];
+      }
+    };
+
+    element.src = candidates[currentIndex];
+  };
+
+  tryNext();
+}
+
 // STORE PAGE LOGIC
 const params = new URLSearchParams(window.location.search);
 const store = params.get("store");
 const title = document.getElementById("storeTitle");
 const image = document.getElementById("storeImage");
 const message = document.getElementById("storeMessage");
+const bottomImage = document.querySelector("img.bottom");
+
+if (bottomImage) {
+  loadImageWithFallback(bottomImage, "updatedFLGraphicPNG.png");
+}
 
 if (store) {
   const imageCode = storeMap[store];
 
   if (imageCode) {
     title.textContent = `Store ${store}`;
-    image.src = `./Images/${imageCode}.png`;
+    loadImageWithFallback(image, `${imageCode}.png`);
     image.style.display = "block";
     message.style.display = "none";
   } else {
