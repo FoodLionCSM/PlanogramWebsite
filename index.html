@@ -95,6 +95,13 @@
     body {
       padding: 20px 15px;
       box-sizing: border-box;
+      justify-content: center;
+    }
+
+    .hero-card {
+      width: min(92vw, 360px);
+      padding: 24px 18px;
+      margin: 0 auto;
     }
 
     h1 {
@@ -106,11 +113,15 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
+      align-items: stretch;
+      justify-content: center;
     }
 
     #storeInput,
     button {
       width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
     }
   }
 
