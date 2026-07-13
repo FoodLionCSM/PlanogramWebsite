@@ -28,7 +28,7 @@ if (store) {
 
   if (imageCode) {
     title.textContent = `Store ${store}`;
-    image.src = `images/${imageCode}.png`;
+    image.src = `./Images/${imageCode}.png`;
     image.style.display = "block";
     message.style.display = "none";
   } else {
